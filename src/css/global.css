@@ -1,0 +1,68 @@
+.titulo {
+    font-family: "Nata Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 25px;
+}
+
+.btn{
+    font-family: "Nata Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 17px;
+    color: rgb(46, 46, 46);
+    
+}
+
+input {
+    border-style: solid;
+    border-color:rgb(114, 113, 113);
+    border-radius: 13px;
+    margin-bottom: 10px;
+}
+
+.btn-primary:hover {
+    background-color:rgb(255, 115, 0);
+    border-color: rgb(255, 115, 0);
+}
+
+.btn-primary {
+    background-color: rgb(250, 136, 30);
+    border: none;
+    border-radius: 15px;
+}
+
+.btn-account{
+    background-color: rgb(250, 136, 30);
+    border: none;
+    border-radius: 15px;
+}
+
+body{
+    background-image: url(../../public/assets/images/hotel-fundo.jpg);
+}
+
+.hero-frame{
+    height: 56vh;
+    /*max-width: 1200px; limite largura*/
+    margin: o auto;
+    overflow: hidden; /*impede que a imagem vaze do quadro*/
+    background:rgb(114, 113, 113); /*aplicar core ao fundo quando a imagem nao ocupa todo o espaço*/
+}
+
+.hero-img{
+    width: 100%;
+    height: 100%;
+    /*aplica prorpiedade cover para que a imagem preencha o quadro*/
+    object-fit: cover;
+    object-position: center; /*centraliza o recorte da imagem*/
+}
+@media (max-width:576px){
+    .hero-frame{
+        height: 50vh;
+    }
+}
+
+/*#root { 
+flex-direction: column;
+} 
