@@ -1,6 +1,6 @@
 <?php
  
-class senhaControler{
+class senhaController{
     public static function geradorHash($senha){
         return password_hash('$senha', PASSWORD_BCRYPT);
     }

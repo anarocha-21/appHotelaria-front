@@ -1,10 +1,15 @@
 <?php
 require_once __DIR__ ."/controllers/autenticador.php";
-require_once __DIR__ ."/controllers/senha.php";
-require_once __DIR__ . "/controllers/quartoController.php";
+require_once __DIR__ ."/controllers/senhaController.php";
 require_once __DIR__ . "/helpers/token_jwt.php";
 
-quartoController::getAll($conn);
+require_once __DIR__ . "/controllers/quartoController.php";
+require_once __DIR__ . "/controllers/addController.php";
+
+
+
+//quartoController::getAll($conn);
+addController::getAll($conn);
 
 /*$data = [
     "nome" => "quarto",

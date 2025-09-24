@@ -1,6 +1,6 @@
 export default function Footer(){
  
- const Footer = document.createElement("div");
+ const Footer = document.createElement("footer");
     Footer.innerHTML =
     `<!-- Footer -->
     <footer class="text-center text-lg-start bg-body-tertiary text-muted">

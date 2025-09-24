@@ -12,10 +12,10 @@ $method = $_SERVER['REQUEST_METHOD'];
  
 $baseFolder = strtolower(basename(dirname(__FILE__)));
 $uri = str_replace("/$baseFolder", "", $uri);
-$segment = explode("/", trim($uri, "/"));
+$segments = explode("/", trim($uri, "/"));
  
-$route = $segment[0] ?? null;
-$subRoute = $segment[1] ?? null;
+$route = $segments[0] ?? null;
+$subRoute = $segments[1] ?? null;
  
 if ($route != "api"){
     //require __DIR__ . "/public/index.html";
@@ -25,7 +25,7 @@ if ($route != "api"){
 }
    
     elseif($route === "api"){
-    if(in_array($subRoute, ["login", "quartos"])){
+    if(in_array($subRoute, ["login", "quarto", "add", "cliente", "pedido", "reserva"])){
         require "rotas/${subRoute}.php";
     }else{
     return jsonResponse(['message'=>'rota da API não encontrada.', 404]);  

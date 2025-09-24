@@ -13,7 +13,7 @@ const routes = {
 function getPath() {
     //obtem o hash, remove o # e tira os espaços
     const url = (location.pathname || "").replace("/Meusite/", "/").trim();
-    console.log(url);
+    //console.log(url);
 
     //retorna url se começar com "/" se não, retorna "/home" como padrao
     return url && url.startsWith("/") ? url : "/home";
