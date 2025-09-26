@@ -1,0 +1,24 @@
+{
+  "name": "apphotelaria-front",
+  "version": "1.0.0",
+  "description": "Projeto front-end do sistema de reservas dos hotel para web",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "apphoelaria",
+    "gerenciamento",
+    "de",
+    "reservas",
+    "web",
+    "front-end",
+    "javascript",
+    "react"
+  ],
+  "author": "Leonardo",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.3.7"
+  }
+}

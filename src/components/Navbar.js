@@ -5,7 +5,7 @@ export default function Navbar() {
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="../src/pages/home.html">
+    <a class="navbar-brand" href="home">
       <img src = "public/assets/images/logo-hotel.png"
       style = "width: 50px; heigth: 50px;">
     </a>

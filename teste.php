@@ -9,7 +9,11 @@ require_once __DIR__ . "/controllers/addController.php";
 
 
 //quartoController::getAll($conn);
-addController::getAll($conn);
+//addController::getAll($conn);
+clienteController::getAll($conn);
+//pedidoController::getAll($conn);
+//reservaController::getAll($conn);
+
 
 /*$data = [
     "nome" => "quarto",

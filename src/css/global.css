@@ -1,5 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
 #root { 
-flex-direction: column;
+    flex-direction: column;
+    gap: 5vh;
+    padding-bottom: 5vh;
+    background-color: rgb(94, 11, 11);
 } 
 
 .titulo {
@@ -30,12 +39,7 @@ input {
     border-color: rgb(255, 115, 0);
 }
 
-#root{
-    flex-direction: column;
-    gap: 10vh;
-    padding-bottom: 10vh;
-    background-color: beige;
-}
+
 
 .btn-primary {
     background-color: rgb(250, 136, 30);
@@ -49,74 +53,47 @@ input {
     border-radius: 15px;
 }
 
-body{
-    background-image: url(../../public/assets/images/hotel-fundo.jpg);
-}
 
 .hero-frame{
-    height: 56vh;
-    /*max-width: 1200px; limite largura*/
     overflow: hidden; /*impede que a imagem vaze do quadro*/
 }
 
-.hero img, .hero{
+.hero img {
     /*aplica prorpiedade cover para que a imagem preencha o quadro*/
     object-fit: cover;
-    object-position: bottom; 
+    object-position: center; 
     height: 70vh;
 }
 
 /*responsividade media-query*/
 @media (max-width:576px){
-    .hero img, .hero{
+    .hero img {
         height: 50vh;
     }
 }
 
-.card-container {
-    margin: 15px;
+.card-container img {
+    object-fit: cover;
+    object-position: center; 
+    height: 20vh;
+}
+
+
+.groupCards {
     display: flex;
     justify-content: center;
+    gap: 8vh;
 }
 
-/* Estilo para o carrossel dentro do card */
-.card .carousel {
-    border-top-left-radius: calc(0.375rem - 1px);
-    border-top-right-radius: calc(0.375rem - 1px);
-    overflow: hidden;
-}
 
-.room-card {
-    width: 700px; /* Card mais largo */
-    max-width: 95%; /* Responsivo */
-    margin: 0 auto; /* Centraliza */
-}
-
-.room-card .card-body {
+.dateSelector {
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza conteúdo internamente */
-    text-align: center; /* Texto centralizado */
+    justify-content: center;
+    align-items: center;    
+    gap: 10px;              
+    flex-direction: row;
+    width: 100%;            
+    padding: 10px;          
+    margin-bottom: 10px;
 }
 
-.room-card .card-text {
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-.room-card .btn {
-    width: 80%; /* Botão mais largo */
-    padding: 12px;
-}
-
-/* Ajuste para o carrossel ficar proporcional */
-.room-card .carousel {
-    height: 250px;
-}
-
-.room-card .carousel-inner,
-.room-card .carousel-item,
-.room-card .card-img-top {
-    height: 100%;
-    object-fit: cover;
-}
