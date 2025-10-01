@@ -41,7 +41,7 @@ class clienteModel {
             $data["cpf"],
             $data["email"],
             $data["senha"],
-            $data["regras_id"]
+            $data["regras_id"],
             $id
         );
         return $stmt->execute();

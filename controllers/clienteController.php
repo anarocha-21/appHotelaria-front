@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../models/clienteModel.php";
 
 class clienteController{
+    
     public static function create($conn, $data) {
         $result = clienteModel::create($conn, $data);
         
