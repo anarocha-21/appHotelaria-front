@@ -13,6 +13,9 @@ export default function renderLoginPage() {
     const form = Form();
     const contentForm = form.querySelector('form');
 
+    const footer = Footer();
+    foot.appendChild(footer);
+
 
     //Inputs e botão presentes no form
     const inputEmail = contentForm.querySelector('input[type="email"]');
@@ -28,6 +31,7 @@ export default function renderLoginPage() {
         try {
             const result = await loginRequest(email, senha);
             saveToken(result.token);
+            console.log("Login realizado com sucesso");
             //window.location.pathname = 'home';
         }
         catch {

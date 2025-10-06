@@ -53,6 +53,28 @@ class clienteModel {
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+    public static function clientValidation($conn, $email, $senha) {
+        $sql = "SELECT clientes.id, clientes.nome, clientes.email, clientes.senha 
+        FROM clientes 
+        JOIN regras ON fk_regras = clientes.cargo_id
+        WHERE clientes.email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+ 
+        if($client = $result->fetch_assoc()) {
+        
+            if(PasswordController::validateHash($password, $client['senha'])) {
+                unset($client['senha']);
+                return $client;  
+            }
+
+        return false;
+        
+        }
+    }
 }
 
 ?>

@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . "/../models/quartoModel.php";
+require_once  "validacaoController.php";
+
 
 class quartoController{
 
@@ -14,24 +16,47 @@ class quartoController{
     }
  
     public static function getAll($conn){
-        $roomList = quartoModel::getAll($conn);
-        return jsonResponse($roomList);
+        $result = quartoModel::getAll($conn);
+        return jsonResponse($result);
     }
  
     public static function getById($conn, $id){
-        $buscId = quartoModel::getById($conn, $id);
-        return jsonResponse($buscId);
+        $result = quartoModel::getById($conn, $id);
+        return jsonResponse($result);
     }
  
     public static function delete($conn, $id){
-        $delet = quartoModel::delete($conn, $data);
-        if ($delet){
+        $result = quartoModel::delete($conn, $data);
+        if ($result){
             return jsonResponse(['mesage'=>"Quarto excluido com sucesso"]);
         }else{
-            return jsonResponse(['mesage'=>"Nao criado"]);
+            return jsonResponse(['mesage'=>"Nao criado"], 400);
         }
     }
 
+     public static function update($conn, $id, $data) {
+        $result = RoomModel::update($conn, $id, $data);
+        if($result){
+            return jsonResponse(['message'=> 'Room atualizado']);
+        } else{
+            return jsonResponse(['message'=> 'Deu merda'], 400);
+        }
+    }
+
+    public static function searchDisp($conn, $data) {
+        validacaoController::validate_data($data, ["inicio", "fim", "capacidade"]);
+        
+        $data['chegada'] = validacaoController::fix_dateHour($data["chegada"], 14);
+        $data["saida"] = validacaoController::fix_dateHour($data["saida"], 12);
+
+        $result = quartoModel::buscarDisponivel($conn, $data);
+        if ($result !== false && !empty($result)) {
+            return jsonResponse(['message'=>"quartos Disponiveis", 'Quartos'=> $result]);
+            
+        } else {
+            return jsonResponse(['message'=>"Erro ao buscar quartos disponiveis"], 404); 
+        }
+    }
 }
 
 ?>

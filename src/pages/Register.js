@@ -1,6 +1,7 @@
 import { createRequest } from "../api/clienteApi.js";
 import Form from "../components/Form.js";
 import Navbar from "../components/Navbar.js";
+import Footer from "../components/Footer.js";
  
 export default function renderRegisterPage() {
     const nav = document.getElementById('navbar');
@@ -11,6 +12,12 @@ export default function renderRegisterPage() {
     const formulario = Form();
     const titulo = formulario.querySelector('h1');
     titulo.textContent = "Cadastre-se";
+
+    const pezin = document.getElementById('footer');
+    pezin.innerHTML = '';
+    
+    const footer = Footer();
+    pezin.appendChild(footer);
  
  
     //Seleciono o elemento form que está presente em ./components/Form.js
@@ -50,8 +57,8 @@ export default function renderRegisterPage() {
     contentForm.insertBefore(confSenha, contentForm.children[5]);
  
  
-const btnRegister = formulario.querySelector('button');
-btnRegister.textContent = "Criar conta";
+    const btnRegister = formulario.querySelector('button');
+    btnRegister.textContent = "Criar conta";
 
     contentForm.addEventListener('submit', async(e)=> {
         e.preventDefault();

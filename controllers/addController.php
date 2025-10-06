@@ -3,7 +3,8 @@
 require_once __DIR__ . "/../models/addModel.php";
 
 class addController{
-    public static function create($conn, $data) {
+    public static function create($conn, $data)
+        ValidController::validate_data($data, ["nome", "preco"]); {
         $result = addModel::create($conn, $data);
         
         if ($result) {
