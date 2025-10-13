@@ -20,7 +20,12 @@ export default function renderHomePage() {
     const dSelector = DateSelector();
     divRoot.appendChild(dSelector);
 
+    /*criar constante que armazene o valor da data de hoje*/
+    const dateToday = new Date().toISOString().split("T")
     const [dateCheckIn, dateCheckOut] = dSelector.querySelectorAll('input[type="date"]');
+    dateCheckIn.min = dateToday;
+    dateCheckOut.min = dateToday;
+
     const guestAmount = dSelector.querySelector('select');
     const btnSearchRoom = dSelector.querySelector('button');
 
