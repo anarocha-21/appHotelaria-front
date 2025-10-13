@@ -1,26 +1,20 @@
-import { loginRequest, saveToken } from "../api/authApi.js";
+import { loginRequest, saveToken } from "../api/authAPI.js";
 import Form from "../components/Form.js";
 import Navbar from "../components/Navbar.js";
-import Footer from "../components/Footer.js";
 
-export default function renderLoginPage() {
+export default function renderLoginPage() { 
     const nav = document.getElementById('navbar');
     nav.innerHTML = '';
-
+    
     const navbar = Navbar();
     nav.appendChild(navbar);
 
-    const form = Form();
-    const contentForm = form.querySelector('form');
-
-    const footer = Footer();
-    foot.appendChild(footer);
-
+    const formulario = Form();
+    const contentForm = formulario.querySelector('form');
 
     //Inputs e botão presentes no form
     const inputEmail = contentForm.querySelector('input[type="email"]');
-    const inputSenha = contentForm.querySelector('input[type="password"');
-
+    const inputSenha = contentForm.querySelector('input[type="password"]');
 
     //Monitora o clique no botão para acionar um evento de submeter os dados do form
     contentForm.addEventListener("submit", async (e) => {
@@ -30,28 +24,12 @@ export default function renderLoginPage() {
 
         try {
             const result = await loginRequest(email, senha);
+    
             saveToken(result.token);
-            console.log("Login realizado com sucesso");
-            //window.location.pathname = 'home';
+            //window.location.pathname = "/meusite/home";
         }
         catch {
             console.log("Erro inesperado!");
         }
-
     });
-
-
-    const signupLink = document.createElement('a');
-    signupLink.innerHTML = `Não possui uma conta? Cadastre-se`;
-    signupLink.style.textAlign = 'center';
-    signupLink.style.marginTop = '20px';
-    signupLink.href = 'cadastro';
-
-    contentForm.appendChild(signupLink);
-
-    const rodape = document.getElementById('Footer');
-    rodape.innerHTML = "";
-
-    const Ft = Footer();
-    rodape.appendChild(Ft);
 }

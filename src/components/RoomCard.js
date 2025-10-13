@@ -1,4 +1,21 @@
-export default function RoomCard(index) {
+export default function RoomCard(itemCard, index) {
+    
+       const {
+        nome,
+        numero,
+        qtd_cama_casal,
+        qtd_cama_solteiro,
+        preco
+    } = itemCard || {};
+
+    const title = nome;
+
+    const camas = [
+        (qtd_cama_casal != null ? `${qtd_cama_casal} cama(s) de casal` : null),
+        (qtd_cama_solteiro != null ? `${qtd_cama_solteiro} cama(s) de solteiro` : null),
+    ].filter(Boolean).join(' - ');
+    
+    
     const card = document.createElement('div');
     card.className = 'card-container'; 
     card.innerHTML = `
@@ -39,10 +56,12 @@ export default function RoomCard(index) {
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-                
-        <div class="card-body">
-            <h5 class="card-title titulo">Suíte Luxo</h5>
-                <p class="card-text">Desfrute do conforto da nossa Suíte Luxo com todas as comodidades.</p>
+            <div class="card-body">
+            <h5 class="card-title">${title}</h5>
+            <p class="card-text">Descrição do quarto: Lorem ipsum dolor sit amet consectetur
+             adipisicing elit. Officia, harum libero, ratione, nostrum iusto dicta.</p>
+             ${camas? `<li>${camas}` : ""}
+             ${preco != null ? `<li>preco: R$ ${numero(preco).toFixed(2)}</li>` : ""}
             <a href="#" class="btn btn-primary">Reservar</a>
         </div>
 

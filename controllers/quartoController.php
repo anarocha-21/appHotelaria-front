@@ -44,7 +44,7 @@ class quartoController{
     }
 
     public static function searchDisp($conn, $data) {
-        validacaoController::validate_data($data, ["inicio", "fim", "capacidade"]);
+        validacaoController::validate_data($data, ["chegada", "saida", "capacidade"]);
         
         $data['chegada'] = validacaoController::fix_dateHour($data["chegada"], 14);
         $data["saida"] = validacaoController::fix_dateHour($data["saida"], 12);

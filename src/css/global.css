@@ -16,6 +16,7 @@
     font-weight: 700;
     font-style: normal;
     font-size: 25px;
+    margin-bottom: 20px;
 }
 
 .btn{
@@ -95,5 +96,20 @@ input {
     width: 100%;            
     padding: 10px;          
     margin-bottom: 10px;
+}
+
+.cards {
+    display: flex;
+    flex-direction: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.divDate {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+   
 }
 
