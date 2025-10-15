@@ -8,8 +8,8 @@ class clienteController {
     
     public static function create($conn, $data) {
         $login = [
-            "email" => $data["email"];
-            "senha" => $data["senha"];
+            "email" => $data["email"],
+            "senha" => $data["senha"]
         ]
 
         $data['senha'] = senhaController::generateHash($data['senha']);

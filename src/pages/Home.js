@@ -21,8 +21,11 @@ export default function renderHomePage() {
     divRoot.appendChild(dSelector);
 
     /*criar constante que armazene o valor da data de hoje*/
-    const dateToday = new Date().toISOString().split("T")
+    const dateToday = new Date().toISOString().split("T")[0];
+    //console.log(dateToday);
+    
     const [dateCheckIn, dateCheckOut] = dSelector.querySelectorAll('input[type="date"]');
+    
     dateCheckIn.min = dateToday;
     dateCheckOut.min = dateToday;
 

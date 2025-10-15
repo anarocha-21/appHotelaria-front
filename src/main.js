@@ -8,7 +8,7 @@ const routes = {
     "/cadastro": renderRegisterPage,
     "/home": renderHomePage,
     "/cart" : renderCartPage
-    //novas paginas aqui adicionadas confrome desenvolvidas
+    //novas paginas aqui adicionadas conforme desenvolvidas
 };
 
 //obtem o caminho atual a partir do hash da URL

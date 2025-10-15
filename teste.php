@@ -5,8 +5,9 @@ require_once __DIR__ . "/helpers/token_jwt.php";
 
 require_once __DIR__ . "/controllers/quartoController.php";
 require_once __DIR__ . "/controllers/addController.php";
-
-
+require_once __DIR__ . "/controllers/clienteController.php";
+require_once __DIR__ . "/controllers/pedidoController.php";
+require_once __DIR__ . "/controllers/reservaController.php";
 
 //quartoController::getAll($conn);
 //addController::getAll($conn);

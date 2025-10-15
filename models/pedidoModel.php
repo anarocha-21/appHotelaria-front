@@ -17,19 +17,18 @@ class pedidoModel {
     }
 
     public static function create($conn, $data) {
-        $sql = "INSERT INTO pedidos (fk_usuarios, fk_clientes, data, pagamento)
-        VALUES (?, ?, ?, ?);";
+        $sql = "INSERT INTO pedidos (fk_usuarios, fk_clientes, pagamento) VALUES (?, ?, ?);";
         
         $stat = $conn->prepare($sql);
         $stat->bind_param("iis", 
             $data["fk_usuarios"],
             $data["fk_clientes"],
             $data["pagamento"]
-    
         );
         return $stat->execute();
     }
- public static function update($conn, $id, $data) {
+
+    public static function update($conn, $id, $data) {
         $sql = "UPDATE pedidos SET fk_usuarios = ?, fk_clientes = ?, data = ?, pagamento = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iissi",
