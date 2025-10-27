@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../controllers/pedidoController.php";
+require_once __DIR__ ."/../controllers/orderController.php";
 
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
     $id = $segments[2] ?? null;
@@ -19,14 +20,10 @@ elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
     $data = json_decode(file_get_contents('php://input'), true);
 
     if ($opcao == "reservation"){
-        orderController::create($conn, $data);
+        orderController::createOrder($conn, $data);
     }else{
-        orderController::create($conn, $data);
+        pedidoController::create($conn, $data);
     }
-}
-
-else{
-    jsonResponse(['status' => 'erro', 'message' => 'metodo não permitido'])
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "DELETE") {

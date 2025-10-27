@@ -13,7 +13,11 @@ class quartoModel{
             $data["preco"],
             $data["disponivel"]
         );
-        return $stmt->execute();
+        return ($stmt->execute());{
+            return $conn->insert_id;
+        }
+        return false;
+        
     }
 
     public static function getAll($conn){

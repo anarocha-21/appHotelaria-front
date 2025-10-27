@@ -14,7 +14,7 @@ switch ($method) {
 
             if ($inicio && $fim && $capacidade) {
                 $data = ['chegada' => $inicio, 'saida' => $fim, 'capacidade' => $capacidade];
-                $resultados = qaurtoController::searchDisp($conn, $data);
+                $resultados = quartoController::searchDisp($conn, $data);
                 jsonResponse(["message" => "quartos disponiveis",
                 "data" => $resultados]);
             } else {

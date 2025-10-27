@@ -66,7 +66,7 @@ class clienteModel {
  
         if($client = $result->fetch_assoc()) {
         
-            if(PasswordController::validateHash($password, $client['senha'])) {
+            if(senhaController::validateHash($senha, $client['senha'])) {
                 unset($client['senha']);
                 return $client;  
             }

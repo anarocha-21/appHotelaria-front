@@ -30,6 +30,11 @@ export default function renderHomePage() {
     dateCheckOut.min = dateToday;
 
     const guestAmount = dSelector.querySelector('select');
+
+    dateCheckIn.id = 'id-dateCheckin';
+    dateCheckOut.id = 'id-dateCheckout';
+    guestAmount.id = 'id-guestAmount';
+
     const btnSearchRoom = dSelector.querySelector('button');
 
     //Grupo para incorporar cada div de cada card, para aplicar display-flex

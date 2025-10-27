@@ -62,10 +62,30 @@ export default function RoomCard(itemCard, index) {
              adipisicing elit. Officia, harum libero, ratione, nostrum iusto dicta.</p>
              ${camas? `<li>${camas}` : ""}
              ${preco != null ? `<li>preco: R$ ${numero(preco).toFixed(2)}</li>` : ""}
-            <a href="#" class="btn btn-primary">Reservar</a>
+            <a href="#" class="btn btn-primary btn-reservar">Reservar</a>
         </div>
 
     </div>`;
 
-return card;
+    card.querySelector(".btn-reservar").addEventListener('click', (e) => {
+        e.preventDefault();
+        //ler informações setadas nos inputs datecheckin, datecheckout e guestAmoust (ids)
+        const idDateCheckin = document.getElementById("id-dateCheckin");
+        const idDateCheckout = document.getElementById("id-dateCheckout");
+        const idGuestAmount = document.getElementById("id-guestAmount");
+    
+        const chegada = (idDateCheckin?.value || "");
+        const saida = (idDateCheckout?.value || "");
+        const qtd = parseInt|(idGuestAmount?.value || "0", 10);
+
+        if (!chegada || !saida || Number.isNaN(qtd) || qtd <= 0) {
+            console.log("preencha todos os campos");
+            return;
+        }
+        const daily = calculoDiaria(chegada, saida);
+    
+    });
+
+    console.log(calculoDiaria());
+    return card;
 }

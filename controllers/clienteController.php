@@ -10,9 +10,9 @@ class clienteController {
         $login = [
             "email" => $data["email"],
             "senha" => $data["senha"]
-        ]
+        ];
 
-        $data['senha'] = senhaController::generateHash($data['senha']);
+        $data['senha'] = senhaController::geradorHash($data['senha']);
         $result = clienteModel::create($conn, $data);
         
             if ($result) {

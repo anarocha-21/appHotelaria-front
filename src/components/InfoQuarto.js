@@ -1,4 +1,4 @@
-export default function InfoRooms(){
+export default function InfoQuarto(){
 
     const DivPrincipal = document.createElement('div');
     DivPrincipal.className = 'DivPrincipal';
