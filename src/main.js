@@ -2,19 +2,21 @@ import renderHomePage from "./pages/Home.js";
 import renderLoginPage from "./pages/Login.js";
 import renderRegisterPage from "./pages/Register.js";
 import renderCartPage from "./pages/Cart.js";
+import renderCadQuarto from "./pages/cadQuarto.js";
 
 const routes = {
     "/login": renderLoginPage,
     "/cadastro": renderRegisterPage,
     "/home": renderHomePage,
-    "/cart" : renderCartPage
+    "/cart" : renderCartPage,
+    "/cadQuato" : renderCadQuarto
     //novas paginas aqui adicionadas conforme desenvolvidas
 };
 
 //obtem o caminho atual a partir do hash da URL
 function getPath() {
     //obtem o hash, remove o # e tira os espaços
-    const url = (location.pathname || "").replace("/Meusite/", "/").trim();
+    const url = (location.pathname || "").replace("/meusite/", "/").trim();
     console.log(url);
 
     //retorna url se começar com "/" se não, retorna "/home" como padrao

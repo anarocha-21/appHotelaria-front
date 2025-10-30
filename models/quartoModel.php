@@ -62,13 +62,13 @@ class quartoModel{
         WHERE q.disponivel = 1
         AND (q.qtd_cama_casal * 2 + q.qtd_cama_solteiro) >= ?
         AND q.id NOT IN (
-            SELECT r.quarto_id
+            SELECT r.fk_quartos
             FROM reservas r
-            WHERE (r.fim >= ? AND r.inicio <= ?));";
+            WHERE (r.saida >= ? AND r.chegada <= ?));";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("iss",
-            $data['capacidade'],
+            $data['qtd'],
             $data['chegada'],
             $data['saida']
         );

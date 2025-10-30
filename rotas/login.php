@@ -6,10 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $data = json_decode(file_get_contents('php://input'), true);
 
     if ($opcao == "cliente"){// login do cliente
-        autenticador::login($conn, $data);
+        autenticador::loginClient($conn, $data);
     
-    } else if
-        ($opcao == "employee") { //login do funcionario
+    } else if($opcao == "employee") { //login do funcionario
         autenticador::login($conn, $data);
    
     }else{
@@ -25,7 +24,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 }else{
     jsonResponse([
     "status"=>"erro",
-    "message"=>"Metodo não permitido"], 405);
+    "message"=>"método não permitido"], 405);
 }
 
 ?>

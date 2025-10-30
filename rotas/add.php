@@ -3,6 +3,8 @@
 require_once __DIR__ . "/../controllers/addController.php";
 
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
+    validateToken('atendente');
+
     $id = $segments[2] ?? null;
 
     
@@ -16,6 +18,8 @@ if ( $_SERVER['REQUEST_METHOD'] === "GET") {
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
+    validateTokenAPI('atendente');
+    
     $data = json_decode(file_get_contents('php://input'), true);
     addController::create($conn, $data);
 }
@@ -34,6 +38,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === "DELETE") {
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "PUT") {
+    validateTokenAPI('atendente');
     $data = json_decode(file_get_contents('php://input'), true);
     $id = $data["id"];
 

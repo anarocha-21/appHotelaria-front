@@ -7,26 +7,28 @@ $param = $segments[2] ?? null;
 
 switch ($method) {
     case "GET":
-        if ($param === 'disponiveis') {
-            $chegada = isset($_GET['chegada']) ? $_GET['chegada'] : null;
-            $saida = isset($_GET['saida']) ? $_GET['saida'] : null;
-            $capacidade = isset($_GET['capacidade']) ? $_GET['capacidade'] : null;
 
-            if ($inicio && $fim && $capacidade) {
-                $data = ['chegada' => $inicio, 'saida' => $fim, 'capacidade' => $capacidade];
-                $resultados = quartoController::searchDisp($conn, $data);
-                jsonResponse(["message" => "quartos disponiveis",
-                "data" => $resultados]);
-            } else {
-                jsonResponse(["message" => "Parâmetros 'chegada' e 'saida' são obrigatórios."], 400);
+        if(isset($param)) {
+            if (is_numeric($param)) {
+                quartoController::getById($conn, $param);
+
+            } elseif ($param === 'disponiveis') {
+    
+              $data = [ 
+                "chegada" => isset($_GET['chegada']) ? $_GET['chegada'] : null,
+                "saida" => isset($_GET['saida']) ? $_GET['saida'] : null,
+                "qtd" => isset($_GET['qtd']) ? $_GET['qtd'] : null];
+                quartoController::searchDisp($conn, $data);
+        
+            } else{ 
+                jsonResponse(['message'=>"Essa rota não existe"], 400);
             }
-        } 
-        elseif ($param) {
-            quartoController::getById($conn, $param);
-        } 
-        else {
-            quartoController::getAll($conn);
         }
+        else {
+             quartoController::getAll($conn);
+        }
+        
+
     break;
 
     case "DELETE":

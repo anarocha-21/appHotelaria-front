@@ -18,7 +18,7 @@ class addModel {
 
     public static function create($conn, $data) {
         $sql = "INSERT INTO adicionais (nome, preco) 
-        VALUES (?, ?);";
+        VALUES (?, ?)";
         
         $stat = $conn->prepare($sql);
         $stat->bind_param("sd", 

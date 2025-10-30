@@ -3,6 +3,7 @@ import Hero from "../components/Hero.js";
 import Navbar from "../components/Navbar.js";
 import RoomCard from "../components/RoomCard.js";
 import DateSelector from "../components/DateSelector.js";
+import CardLounge from "../components/CardLounge.js";
 
 
 export default function renderHomePage() {
@@ -42,14 +43,74 @@ export default function renderHomePage() {
     cardsGroup.className = "cards";
     cardsGroup.id = "cards-result";
 
+    const cardsGroupInfra = document.createElement('div');
+    cardsGroupInfra.className = "cards";
+
+    const tituloInfra = document.createElement('h2');
+    tituloInfra.textContent = "Conheça nosso hotel";
+    tituloInfra.style.textAlign = "center";
+
+
+    /*Anterior à pesquisa: aparecerá o card da infraestrutura do hotel]
+    path: é nome do arquivo que está em assets/images */
+    const loungeItems = [
+            {path: "hotel-restaurante.jpeg", title:
+                "Restaurante", text: "Nosso restaurante"
+                 + " é um espaço agradável e familiar!"},
+
+            {path: "hotel-spa.jpg", title: "SPA",
+                 text: "Nosso SPA é ideal para"
+                 + " momentos de relaxamento!"},
+
+            {path: "hotel-bar.png", title: "Bar",
+                 text: "Nosso bar oferece"
+                 + " drinks sem metanol, confia!"}
+    ];
+
+    /*Percorre a array loungeItems*/
+    for (let i = 0; i < loungeItems.length; i++) {
+        const cardLounge = CardLounge(loungeItems[i], i);
+        cardsGroupInfra.appendChild(cardLounge);   //AQUI FOI MUDADO PARA QUE cardsGroupInfra incorpore cada card de infraestrutura do hotel
+    }
+
+    /*A depender da data de check-in, será
+    calculado o mínimo para a data de check-out (o mínimo de diárias)*/
+    function getMinDateCheckout(dateCheckIn) {
+        const minDaily = new Date(dateCheckIn);
+        minDaily.setDate(minDaily.getDate() + 1);  /*Nº mínimo de diárias*/
+        return minDaily.toISOString().split('T')[0];
+    } 
+
+    /*Evento para monitorar a alteração na data de check-in
+    para calcular o mínimo do check-out e verificar
+    se check-out é posterior a check-in */
+
+    //dateCheckIn.addEventListener("change", function() {
+    dateCheckIn.addEventListener("change", async (e) => {
+        //Se houver um valor válido em dateCheckin
+        if (dateCheckIn.value) {
+            const minDateCheckout = getMinDateCheckout(dateCheckIn.value);
+            dateCheckOut.min = minDateCheckout;
+        
+        //Se já houver uma data de check-out selecionada e for inválida
+            if (dateCheckOut.value && dateCheckOut.value <= dateCheckIn.value) {
+                dateCheckOut.value = "";
+                alert("A data de check-out deve ser posterior ao check-in!");
+                /* Estou utilizando alerta porque EU, PROFESSORA, não tenho
+                um modal, vocês deveriam já ter e chamá-lo no lugar do alert() */ 
+            }
+        }
+    });
+
+
     btnSearchRoom.addEventListener("click", async(e) => {
         e.preventDefault();
 
         const chegada = (dateCheckIn?.value || "").trim();
         const saida = (dateCheckOut?.value || "").trim();
-        const capacidade = parseInt(guestAmount?.value || "0", 10);
+        const qtd = parseInt(guestAmount?.value || "0", 10);
     
-        if (!chegada || !saida || Number.isNaN(capacidade) || capacidade<= 0) {
+        if (!chegada || !saida || Number.isNaN(qtd) || qtd<= 0) {
             console.log("Preencha todos os campos!");
             /* Tarefa 1: Renderizar nesse if() posteriormente um modal do bootstrap!
             https://getbootstrap.com/docs/5.3/components/modal/ */
@@ -71,13 +132,17 @@ export default function renderHomePage() {
     https://getbootstrap.com/docs/5.3/components/spinners/ */
 
     try {
-        const result = listAvailableRoomsRequest({chegada, saida, capacidade });
+        const result = await listAvailableRoomsRequest({chegada, saida, qtd});
+
+
         if (!result.length) {
             console.log("Nenhum quarto disponível para esse período!");
             /* Tarefa 4: Renderizar nesse if() posteriormente um modal do bootstrap!
             https://getbootstrap.com/docs/5.3/components/modal/ */
             return;
         }
+
+
         cardsGroup.innerHTML = '';
         result.forEach((itemCard, i) => {
             cardsGroup.appendChild(RoomCard(itemCard, i));
@@ -91,7 +156,8 @@ export default function renderHomePage() {
     });
 
     divRoot.appendChild(cardsGroup);
-
+    divRoot.appendChild(tituloInfra);
+    divRoot.appendChild(cardsGroupInfra);
 
 }
    

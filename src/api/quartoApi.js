@@ -1,6 +1,6 @@
 export async function addRoom(contentForm){
     const formData = new FormData(contentForm);
-    const imputFotos = ['image/jpeg', 'image/png'];
+    const typeAccept = ['image/jpeg', 'image/png'];
     const inputFotos = contentForm.querrySelector('#formFileMultple');
 
     const imgs = inputFotos.files;
@@ -14,12 +14,19 @@ export async function addRoom(contentForm){
         method: "POST",
         body: formData 
     });
-    if(!response.ok){
+
+    let result = null;
+    try {
+        result = await response.json();
+    }
+    catch {
+        // Se não for JSON válido, result permanece null
+        result = null; }
+    if(!response.ok) {
         throw new Error(`Erro ao enviar requisição: ${response.status}`);
     }
-    const result = await response.json();
     return result;
-}
+}   
 
 
 /* Listar os quartos disponíveis de acordo com inicio, fim e qtd */
@@ -29,7 +36,7 @@ export async function listAvailableRoomsRequest({ chegada, saida, qtd }) {
     if (saida) params.set("saida", saida);
     if (qtd !== null && qtd !== "") params.set("qtd", String(qtd));
 
-    const url = `api/quartos/disponiveis?${params.toString()}`;
+    const url = `api/quarto/disponiveis?${params.toString()}`;
     const response = await fetch(url, {
         method: "GET",
         headers: {

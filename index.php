@@ -1,6 +1,7 @@
 <?php
 require_once "config/database.php";
 require_once "helpers/response.php";
+require_once "helpers/token_jwt.php";
  
  
 if ($erroDB) {
@@ -18,8 +19,8 @@ $route = $segments[0] ?? null;
 $subRoute = $segments[1] ?? null;
  
 if ($route != "api"){
-    require __DIR__ . "/public/index.html";
-    //require "teste.php";
+    // require __DIR__ . "/public/index.html";
+    require "teste.php";
     exit;
  
 }
@@ -36,5 +37,5 @@ else{
     echo "404 pagina nao encontrada";
     exit;
 }
+
 ?>
- 

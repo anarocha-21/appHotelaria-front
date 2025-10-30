@@ -57,14 +57,17 @@ class quartoController
 
     public static function searchDisp($conn, $data)
     {
-        validacaoController::validate_data($data, ["chegada", "saida", "capacidade"]);
+        validacaoController::validate_data($data, ["chegada", "saida", "qtd"]);
 
         $data['chegada'] = validacaoController::fix_dateHour($data["chegada"], 14);
         $data["saida"] = validacaoController::fix_dateHour($data["saida"], 12);
 
         $result = quartoModel::buscarDisponivel($conn, $data);
         if ($result !== false && !empty($result)) {
-            return jsonResponse(['message' => "quartos Disponiveis", 'Quartos' => $result]);
+            // foreach ($result as &$quarto) {
+            //     $quarto['fotos'] = fotoModel::getByQuartoId($conn, $quarto['id']);
+            // }
+            return jsonResponse(['Quartos'=> $result]);
 
         } else {
             return jsonResponse(['message' => "Erro ao buscar quartos disponiveis"], 404);

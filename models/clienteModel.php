@@ -55,9 +55,9 @@ class clienteModel {
     }
 
     public static function clientValidation($conn, $email, $senha) {
-        $sql = "SELECT clientes.id, clientes.nome, clientes.email, clientes.senha 
+        $sql = "SELECT clientes.id, clientes.nome, clientes.email, clientes.senha, regras.nome AS regras
         FROM clientes 
-        JOIN regras ON fk_regras = clientes.cargo_id
+        JOIN regras ON regras.id = clientes.regras_id
         WHERE clientes.email = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $email);
@@ -66,7 +66,7 @@ class clienteModel {
  
         if($client = $result->fetch_assoc()) {
         
-            if(senhaController::validateHash($senha, $client['senha'])) {
+            if(senhaController::leitorHash($senha, $client['senha'])) {
                 unset($client['senha']);
                 return $client;  
             }

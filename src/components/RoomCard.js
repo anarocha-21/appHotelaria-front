@@ -1,6 +1,26 @@
+import { addItemToHotel_Cart } from "../store/cartStore.js";
+
+function calculoDiaria(checkIn, checkOut) {
+    /* Feito para teste:
+        const checkIn = "2026-01-01";
+        const checkOut = "2026-01-08"; */
+    
+    const [yin, min, din] = String(checkIn).split("-").map(Number);
+    const [yout, mout, dout] = String(checkOut).split("-").map(Number);
+
+    const tzin = Date.UTC(yin, min -1, din);
+    const tzout = Date.UTC(yout, mout -1, dout);
+
+    console.log("Milissegundos desde 1970-01-01 00:00:00 " +
+        tzin);
+
+    return Math.floor((tzout - tzin) / (1000 * 60 * 60 * 24));
+}
+
 export default function RoomCard(itemCard, index) {
     
        const {
+        id,
         nome,
         numero,
         qtd_cama_casal,
@@ -33,11 +53,11 @@ export default function RoomCard(itemCard, index) {
             <div class="carousel-inner shadow">
 
                 <div class="carousel-item active">
-                    <img src="public/assets/images/hotel-hall.jpg" class="d-block w-100 card-img-top" alt="Quarto 1">
+                    <img src="public/assets/images/hotel-restaurante.jpeg" class="d-block w-100 card-img-top" alt="Quarto 1">
                 </div>
 
                 <div class="carousel-item">
-                    <img src="public/assets/images/hotel-quarto.jpg" class="d-block w-100 card-img-top" alt="Quarto 2">
+                    <img src="public/assets/images/hotel-quarto.jpeg" class="d-block w-100 card-img-top" alt="Quarto 2">
                 </div>
 
                 <div class="carousel-item">
@@ -61,7 +81,7 @@ export default function RoomCard(itemCard, index) {
             <p class="card-text">Descrição do quarto: Lorem ipsum dolor sit amet consectetur
              adipisicing elit. Officia, harum libero, ratione, nostrum iusto dicta.</p>
              ${camas? `<li>${camas}` : ""}
-             ${preco != null ? `<li>preco: R$ ${numero(preco).toFixed(2)}</li>` : ""}
+             ${preco != null ? `<li>preco: R$ ${Number(preco).toFixed(2)}</li>` : ""}
             <a href="#" class="btn btn-primary btn-reservar">Reservar</a>
         </div>
 
@@ -83,9 +103,21 @@ export default function RoomCard(itemCard, index) {
             return;
         }
         const daily = calculoDiaria(chegada, saida);
+         const subtotal = parseFloat(preco) * daily;
+        const novoItemReserva = {
+            id,
+            nome,
+            checkIn: chegada,
+            checkOut: saida,
+            guests: qtd,
+            daily,
+            subtotal
+        }
+        addItemToHotel_Cart(novoItemReserva);
+        //Alerta pode ser trocado por um modal com melhor aparência
+        alert(`Reserva do quarto adicionada: ${nome} - Preço/diária: R$ ${preco}
+        - Nº de diárias: ${daily} - Subtotal: R$ ${subtotal}`);
     
     });
-
-    console.log(calculoDiaria());
     return card;
 }

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../models/addModel.php";
+require_once __DIR__ ."/../controllers/validacaoController.php";
 
 class addController{
     public static function create($conn, $data){

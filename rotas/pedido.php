@@ -16,8 +16,11 @@ if ( $_SERVER['REQUEST_METHOD'] === "GET") {
 }
 
 elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $user = validateToken('cliente');
+    
     $opcao = $segments[2] ?? null;
     $data = json_decode(file_get_contents('php://input'), true);
+    $data['clientes_id'] = $user['id'];
 
     if ($opcao == "reservation"){
         orderController::createOrder($conn, $data);

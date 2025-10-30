@@ -19,25 +19,34 @@ function validateToken($token){
     try{
         $key = new Key(SECRET_KEY, "HS256");
         $decode = JWT::decode($token, $key);
-            return $decode->$sub;
-        }catch(Exception $error){
-            return false;
-        }
-
-        function  validateTokenAPI() {
-        $headers = getallheaders();
-
-        if ( !isset($headers['Authorization']) ) {
-            jsonResponse(['message'=>'Token ausente'], 401);
-            exit;
-        }
-
-        $token = str_replace("Bearer", "", $headers['Authorization']);
-            if ( !validateToken($token) ) {
-            jsonResponse(['message'=>'Token inválido'], 401);
-            exit;
-        }
+        $result = json_decode(json_encode($decode->sub), true);
+        return $result;
+    }catch(Exception $error){
+        return false;
     }
 }
+
+function  validateTokenAPI($typeRole) {
+    $headers = getallheaders();
+
+    if (!isset($headers['Authorization']) ) {
+        jsonResponse(['message'=>'Token ausente'], 401);
+        exit;
+    }
+
+    $token = str_replace("Bearer ", "", $headers['Authorization']);
+    $user = validateToken($token);
+    if (!$user) {
+        jsonResponse(['message'=>'Token inválido'], 401);
+        exit;
+    }
+    //logica de validar o cargo
+    if ($user['regras'] != $typeRole){
+        jsonResponse(['message'=> 'usuario nao autorizado'], 401);
+        exit;
+    }
+    return $user;
+}
+
 
 ?>

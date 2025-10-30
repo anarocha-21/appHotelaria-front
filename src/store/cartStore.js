@@ -43,44 +43,42 @@ estrutura JSON p ex de um pedido:
 }
 */
 
-const key = "hotel_cart";
+const key = "cart";
 
 export function setCart(cart){
-    localStorage.setItem(key, JSON.stringify(cart));
-}
+localStorage.setItem(key, JSON.stringify(Array.isArray(cart) ? cart: [])); 
+} 
 
 export function getCart() {
     try{
-        const raw = localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : { status: "draft", items:[]};
+        const raw = localStorage.getItem(key); 
+        const cart = raw ? JSON.parse(raw) : []; 
+        return Array.isArray(cart) ? cart : []; 
     }catch{
-        return {status: "draft", items: []};
+        return[];
     }
 }
 
-export function addItemToCart(item) {
+export function addItemToHotel_Cart(item) {
     const cart = getCart();
-    cart.items.push(item);
-    setCart(hotel_cart);
-    return hotel_cart;
+    cart.push(item);
+    setCart(cart);
+    return cart;
 }
 
 export function removeItemFromHotel_Cart(i){
-    const hotel_cart = getCart();
-    hotel_cart.items.splice(i, 1);
-    setCart(hotel_cart);
-    return hotel_cart;
+    const cart = getCart();
+    cart.splice(i, 1);
+    setCart(cart);
+    return cart;
 }
 
 export function clearHotel_Cart(){
-    setCart({
-        status: "draft",
-        items: []
-    });
+    setCart();
 }
 
 export function getTotalItems(){
-    const {items} = getCart();
+    const items = getCart();
     const total = items.reduce((acc, it) =>
         acc + Number(it.subtotal || 0), 0
     );

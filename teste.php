@@ -11,10 +11,11 @@ require_once __DIR__ . "/controllers/reservaController.php";
 
 //quartoController::getAll($conn);
 //addController::getAll($conn);
-clienteController::getAll($conn);
+// clienteController::getAll($conn);
 //pedidoController::getAll($conn);
 //reservaController::getAll($conn);
 
+echo senhaController::geradorHash("senha123");
 
 /*$data = [
     "nome" => "quarto",

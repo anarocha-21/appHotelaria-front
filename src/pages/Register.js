@@ -75,6 +75,6 @@ export default function renderRegisterPage() {
             console.log("erro inesperado");
         }
 
-    })
+    });
  
 }
