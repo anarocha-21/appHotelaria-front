@@ -82,8 +82,5 @@ export function getTotalItems(){
     const total = items.reduce((acc, it) =>
         acc + Number(it.subtotal || 0), 0
     );
-    return {
-        total,
-        qtd_items: items.lenght
-    };
+    return total;
 }
