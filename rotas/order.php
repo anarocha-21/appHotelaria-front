@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . "/../controllers/pedidoController.php";
 require_once __DIR__ ."/../controllers/orderController.php";
 
 if ( $_SERVER['REQUEST_METHOD'] === "GET") {
@@ -25,7 +24,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
     if ($opcao == "reservation"){
         orderController::createOrder($conn, $data);
     }else{
-        pedidoController::create($conn, $data);
+        orderController::create($conn, $data);
     }
 }
 
@@ -33,7 +32,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === "DELETE") {
     $id = $segments[2] ?? null;
     
     if (isset($id)) {
-        pedidoController::delete($conn, $id);
+        orderController::delete($conn, $id);
     }
     else {
         jsonResponse([
@@ -46,7 +45,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === "PUT") {
     $data = json_decode(file_get_contents('php://input'), true);
     $id = $data["id"];
 
-    pedidoController::update($conn, $id, $data);
+    orderController::update($conn, $id, $data);
 }
 
 else {

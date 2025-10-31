@@ -1,3 +1,4 @@
+import { finishedOrder } from "../api/orderApi.js";
 import Navbar from "../components/Navbar.js";
 import { clearHotel_Cart, getTotalItems } from "../store/cartStore.js";
 //Importar componente Footer
@@ -93,6 +94,23 @@ export default function renderCartPage() {
         })
     }
     
-
-
+    const btnFinalizar = document.getElementById("btnFinalizar");
+    if(btnFinalizar) {
+        btnFinalizar.addEventListener("click", async () => {
+            const metodoPagamento = "pix";
+            try {
+                const result = await finishedOrder(metodoPagamento, reservas);
+                if(result.ok) {
+                    alert("compra feita com sucesso");
+                    clearHotel_Cart();
+                    renderCartPage();
+                }else{
+                    alert(result.message || "erro ao realizar reserva");
+                }
+            }
+            catch (error) {
+                alert(error?.message || "falha na comunicação com o servidor");
+            }
+        });
+    }
 }
